@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feliz San Valentín ❤️</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Corazones flotando -->
+  <div class="hearts" aria-hidden="true">
+    <span>❤</span><span>💖</span><span>❤</span><span>💘</span><span>❤</span>
+    <span>💖</span><span>❤</span><span>💘</span><span>❤</span><span>💖</span>
+  </div>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="badge">Para mi Guadalupito</div>
+
+      <div class="photo">
+        <!-- IMPORTANTE: pon tu foto con el mismo nombre y en la misma carpeta -->
+        <img src="sticker_der2.png" alt="Nosotros">
+      </div>
+
+      <h1>Feliz San Valentín <span class="pulse">💗</span></h1>
+
+      <p class="msg">
+        Gracias por llegar a mi vida y hacerla más bonita.
+        <br>
+        Eres mi persona favorita en el mundo.
+      </p>
+
+      <div class="signature">
+        Con amor, <strong>Tu Elenitaa</strong> ✨
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="playBtn">
+          <span class="icon">🎵</span>
+          <span id="btnText">Reproducir canción</span>
+        </button>
+        <button class="btn ghost" id="surpriseBtn">Sorpresa 💝</button>
+      </div>
+
+      <div class="note" id="note">
+        Si estás leyendo esto… te elijo hoy y siempre. ❤️
+      </div>
+    </section>
+  </main>
+
+  <!-- Música -->
+  <audio id="music" loop>
+    <source src="Eres Video Oficial.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const music = document.getElementById("music");
+    const playBtn = document.getElementById("playBtn");
+    const btnText = document.getElementById("btnText");
+    const surpriseBtn = document.getElementById("surpriseBtn");
+    const note = document.getElementById("note");
+
+    let playing = false;
+
+    playBtn.addEventListener("click", async () => {
+      try {
+        if (!playing) {
+          await music.play();
+          playing = true;
+          btnText.textContent = "Pausar canción";
+          playBtn.classList.add("playing");
+        } else {
+          music.pause();
+          playing = false;
+          btnText.textContent = "Reproducir canción";
+          playBtn.classList.remove("playing");
+        }
+      } catch (e) {
+        alert("No se pudo reproducir. Verifica que 'cancion.mp3' exista en la carpeta.");
+      }
+    });
+
+    surpriseBtn.addEventListener("click", () => {
+      note.classList.toggle("show");
+    });
+
+    // Si la imagen no carga, avisa en consola
+    const img = document.querySelector(".photo img");
+    img.addEventListener("error", () => {
+      console.log("No se encontró la imagen. Asegúrate de que se llame foto.jpg y esté junto a index.html");
+    });
+  </script>
+</body>
+</html>
